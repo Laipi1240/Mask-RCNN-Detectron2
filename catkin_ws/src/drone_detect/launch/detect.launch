@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="image_transport" type="republish" name="compress_raw" args="compressed in:=/camera_middle/color/image_raw raw out:=/detectron2/image_raw"/>
+	<node pkg="image_transport" type="republish" name="raw_compress" args="raw in:=/detectron2/detections compressed out:=/maskrcnn/detections"/>
+	<node name="unity_detect_ros" pkg="drone_detect" type="unity_detect_ros.py" />
+</launch>
+
