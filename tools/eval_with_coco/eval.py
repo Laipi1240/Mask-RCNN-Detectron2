@@ -24,12 +24,22 @@ from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 
 cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
+
+#register_coco_instances('wamv_val', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/val.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/val')
+#cfg.DATASETS.TEST = ("wamv_val", )
+#subt_metadata = MetadataCatalog.get("wamv_val")
+#dataset_dicts = DatasetCatalog.get("wamv_val")
+
 cfg.DATASETS.TRAIN = ("wamv_train",)
 cfg.DATASETS.TEST = ("wamv_val", )
 cfg.DATALOADER.NUM_WORKERS = 0 #Single thread
 cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml")  # Let training initialize from model zoo
-#cfg.MODEL.ROI_HEADS.NUM_CLASSES = 5  # datasets classes
-cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1  # datasets classes
+cfg.MODEL.ROI_HEADS.NUM_CLASSES = 10  # sim 9 kind model datasets classes
+#cfg.MODEL.ROI_HEADS.NUM_CLASSES = 5  # sim datasets classes
+#cfg.MODEL.ROI_HEADS.NUM_CLASSES = 1  # online datasets classes
+#cfg.MODEL.ROI_HEADS.NUM_CLASSES = 2  # real datasets classes
 cfg.SOLVER.IMS_PER_BATCH = 4 #Batch size
 ITERS_IN_ONE_EPOCH = 610 #dataset_imgs/batch_size
 cfg.SOLVER.MAX_ITER = (ITERS_IN_ONE_EPOCH * 50) # ITERS
@@ -42,15 +52,52 @@ cfg.SOLVER.WARMUP_FACTOR = 1.0 / 1000
 cfg.SOLVER.WARMUP_ITERS = 1000
 cfg.SOLVER.WARMUP_METHOD = "linear"
 cfg.SOLVER.CHECKPOINT_PERIOD = ITERS_IN_ONE_EPOCH #Save training model interval
-cfg.MODEL.WEIGHTS = "online_model/model_final.pth"
+cfg.MODEL.WEIGHTS = "boat_9_kind/model_final.pth"
 #cfg.MODEL.WEIGHTS = "wamv_model/model_final.pth"
-cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.8   # set the testing threshold for this model
+#cfg.MODEL.WEIGHTS = "wamv_boats_split/model_final.pth"
+#cfg.MODEL.WEIGHTS = "wamv_2500imgs_model/model_final.pth"
+#cfg.MODEL.WEIGHTS = "boat200-s1-W/model_final.pth"
+#cfg.MODEL.WEIGHTS = "online_model/model_final.pth"
+#cfg.MODEL.WEIGHTS = "real_dataset_model/model_final.pth"
+#cfg.MODEL.WEIGHTS = "wamv_model/boat20k-5s-4b-W.pth"
+
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7   # set the testing threshold for this model
+
+
 #register_coco_instances('wamv_test', {}, 
 #                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/real_dataset.json', 
 #                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/real_dataset')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/real_dataset_clear.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/real_dataset_clear')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/val.json', 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/val')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/3_split.json', 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/3_split')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online_dataset')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online_scale.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online_scale')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online_patch.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online_patch')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online50_patch_W.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/online50_patch_W')
 register_coco_instances('wamv_test', {}, 
-                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/val.json', 
-                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/val')
+                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/beach360.json', 
+                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/beach360')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/sand100.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/sand100')
+#register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/sea200.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/split_dir/sea200')
+
 cfg.DATASETS.TEST = ("wamv_test", )
 
 # Create predictor
