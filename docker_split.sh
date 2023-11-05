@@ -31,7 +31,7 @@ docker run \
     -e QT_X11_NO_MITSHM=1 \
     -e XAUTHORITY=$XAUTH \
     -v "$XAUTH:$XAUTH" \
-    -v "/home/$USER/unity-example-1:/home/$USER/unity-example-1" \
+    -v "/home/$USER/unity-datasets:/home/$USER/unity-datasets" \
     -v "/home/$USER/Mask-RCNN-Detectron2:/home/$USER/Mask-RCNN-Detectron2" \
     -v "/home/$USER/Downloads:/home/$USER/Downloads" \
     -v "/tmp/.X11-unix:/tmp/.X11-unix" \

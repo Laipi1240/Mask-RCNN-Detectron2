@@ -26,8 +26,8 @@ cfg = get_cfg()
 cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml"))
 
 register_coco_instances('wamv_val', {}, 
-                       '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S1_split_dir/val.json', 
-                      '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S1_split_dir/val')
+                       '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S2_split_dir/val.json', 
+                      '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S2_split_dir/val')
 cfg.DATASETS.TEST = ("wamv_val", )
 subt_metadata = MetadataCatalog.get("wamv_val")
 dataset_dicts = DatasetCatalog.get("wamv_val")
@@ -52,7 +52,7 @@ cfg.SOLVER.WARMUP_FACTOR = 1.0 / 1000
 cfg.SOLVER.WARMUP_ITERS = 1000
 cfg.SOLVER.WARMUP_METHOD = "linear"
 cfg.SOLVER.CHECKPOINT_PERIOD = ITERS_IN_ONE_EPOCH #Save training model interval
-cfg.MODEL.WEIGHTS = "/home/arg/Mask-RCNN-Detectron2/tools/trained_model_result/WAM_V_S1_model_final.pth"
+cfg.MODEL.WEIGHTS = "/home/arg/Mask-RCNN-Detectron2/tools/trained_model_result/WAM_V_S2_model_final.pth"
 #cfg.MODEL.WEIGHTS = "wamv_model/model_final.pth"
 #cfg.MODEL.WEIGHTS = "wamv_boats_split/model_final.pth"
 #cfg.MODEL.WEIGHTS = "wamv_2500imgs_model/model_final.pth"
@@ -98,8 +98,8 @@ cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7   # set the testing threshold for th
 #                        '/home/arg/Mask-RCNN-Detectron2/testing_dir/sea200.json', 
 #                       '/home/arg/Mask-RCNN-Detectron2/testing_dir/sea200')
 register_coco_instances('wamv_test', {}, 
-                       '/home/arg/Mask-RCNN-Detectron2/datasets/data_test/sand100.json', 
-                      '/home/arg/Mask-RCNN-Detectron2/datasets/data_test/sand100')
+                       '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S1_split_dir/val.json', 
+                      '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S1_split_dir/val')
 cfg.DATASETS.TEST = ("wamv_test", )
 
 # Create predictor
