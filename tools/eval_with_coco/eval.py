@@ -97,9 +97,13 @@ cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7   # set the testing threshold for th
 # register_coco_instances('wamv_test', {}, 
 #                        '/home/arg/Mask-RCNN-Detectron2/testing_dir/sea200.json', 
 #                       '/home/arg/Mask-RCNN-Detectron2/testing_dir/sea200')
+# register_coco_instances('wamv_test', {}, 
+#                        '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S5_split_dir/val.json', 
+#                       '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S5_split_dir/val')
+# cfg.DATASETS.TEST = ("wamv_test", )
 register_coco_instances('wamv_test', {}, 
-                       '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S1_split_dir/val.json', 
-                      '/home/arg/Mask-RCNN-Detectron2/datasets/WAM_V_S1_split_dir/val')
+                       '/home/arg/Mask-RCNN-Detectron2/datasets/data_test/sand100.json', 
+                      '/home/arg/Mask-RCNN-Detectron2/datasets/data_test/sand100')
 cfg.DATASETS.TEST = ("wamv_test", )
 
 # Create predictor
